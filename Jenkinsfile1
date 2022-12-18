@@ -11,6 +11,9 @@ node {
                  -Dsonar.login=d37c3a8b0a8ba4eb8c3c682da9df7953bf5838fb'''
         }
     }
+    stage('Quality Gate'){
+        waitForQualityGate abortPipeline: true, credentialsId: 'sonar'
+    }
     
     stage('Build') {
         withMaven(maven: 'MAVEN') {
