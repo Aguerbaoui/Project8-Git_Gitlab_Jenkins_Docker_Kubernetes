@@ -3,12 +3,6 @@ node {
     stage('git clone') {
         git branch: 'main', credentialsId: 'jenkins', url: 'git@gitlab.com:formation-101222/projet_j2e.git'
     }
-    stage('SAST sonarqube') {
-        sh '''mvn sonar:sonar \\
-            -Dsonar.projectKey=myapp \\
-            -Dsonar.host.url=http://13.38.216.37:9000 \\
-            -Dsonar.login=d37c3a8b0a8ba4eb8c3c682da9df7953bf5838fb'''
-    }
     
     stage('Build') {
         withMaven(maven: 'MAVEN') {
