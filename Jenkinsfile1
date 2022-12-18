@@ -12,9 +12,12 @@ node {
 //        }
 //    }
     stage("build & SonarQube analysis") {
+        
               withSonarQubeEnv('Sonarqube') {
-                 sh 'mvn clean package sonar:sonar'
+                    withMaven(maven: 'MAVEN') {
+                        sh 'mvn clean package sonar:sonar'
               }
+        }
       }
 
     
