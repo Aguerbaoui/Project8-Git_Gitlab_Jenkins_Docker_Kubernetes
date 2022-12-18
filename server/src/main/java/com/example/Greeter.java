@@ -9,7 +9,7 @@ public class Greeter {
    * This is a constructor.
    */
   public Greeter() {
-    // Do nothing because of X and Y.
+
   }
 
   //TODO: Add javadoc comment
