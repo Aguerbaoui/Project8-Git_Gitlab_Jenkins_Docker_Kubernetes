@@ -1,3 +1,4 @@
+@Library('slack_demo') _
 pipeline {
 
     agent any
@@ -28,5 +29,12 @@ pipeline {
             }
     }
     } 
+    post { 
+          always { 
+
+            sendNotification currentBuild.result
+
+            }
+      }    
     
 }
