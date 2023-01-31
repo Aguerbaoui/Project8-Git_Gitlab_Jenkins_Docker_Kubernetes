@@ -17,12 +17,12 @@ pipeline {
     }
 
     } 
-      post {
+   /*   post {
         success {
             emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
              
         }
-    } 
+    } */
 
 } 
 
