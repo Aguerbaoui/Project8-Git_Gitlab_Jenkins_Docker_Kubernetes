@@ -1,0 +1,10 @@
+---
+- name: Copy war
+  hosts: Tomcat
+  become: true
+
+  tasks:
+  - name: copy war to the tomcat server
+    copy:
+      src: /var/lib/jenkins/workspace/Git-Gitlab-Jenkins-Ansible-Tomcat/webapp/target/webapp.war
+      dest: /opt/tomcat/latest/webapps
