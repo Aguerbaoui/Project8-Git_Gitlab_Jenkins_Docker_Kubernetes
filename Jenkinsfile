@@ -26,6 +26,14 @@ pipeline {
         
                 }
         }
+         stage('Deploy') {
+             steps {
+                
+                  output= invokeAnsiblePlaybook()
+                  echo "The mul is ${output}"
+        
+                }
+        }
     
 
     } 
