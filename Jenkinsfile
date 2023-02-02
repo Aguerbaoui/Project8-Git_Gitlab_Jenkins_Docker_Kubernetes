@@ -1,8 +1,3 @@
-def invokeAnsiblePlaybook() {
-        ansiblePlaybook become: true, credentialsId: 'private_key1', installation: 'ansible', inventory: 'ansible/inventory/hosts', playbook: 'ansible/playbooks/copyfile.yml'
-
-                    }
-
 
 pipeline {
         agent any
@@ -27,7 +22,7 @@ pipeline {
          stage('Deploy') {
              steps {
                 echo ("Start invokeAnsiblePlaybook")
-                invokeAnsiblePlaybook()
+               ansiblePlaybook become: true, credentialsId: 'private_key1', installation: 'ansible', inventory: 'ansible/inventory/hosts', playbook: 'ansible/playbooks/copyfile.yml'
                 echo ("End invokeAnsiblePlaybook")
                 
                 }
