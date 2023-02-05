@@ -15,7 +15,7 @@ sudo nano /etc/ssh/sshd_config
 ** sudo systemctl reload sshd
 # server side
 ssh-keygen -t rsa
-ssh-copy-id ansadmin@adresse_ip_serveur_client , enter ip a to know the local address
+ssh-copy-id ansible@adresse_ip_serveur_client , enter ip a to know the local address
 # Change in the inventory file 
 nano /etc/ansible/hosts 
 # Teste de la connexion
