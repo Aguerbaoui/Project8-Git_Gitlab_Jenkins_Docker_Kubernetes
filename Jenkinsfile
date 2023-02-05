@@ -22,7 +22,7 @@ pipeline {
          stage('Deploy') {
              steps {
                 echo ("Start invokeAnsiblePlaybook")
-                ansiblePlaybook become: true, credentialsId: 'private_key1', installation: 'ansible', inventory: 'ansible/inventory/hosts', playbook: 'ansible/playbooks/play.yml
+                ansiblePlaybook become: true, credentialsId: 'private_key1', installation: 'ansible', inventory: 'ansible/inventory/hosts', playbook: 'ansible/playbooks/play.yml'
                 echo ("End invokeAnsiblePlaybook")
                 
                 }
