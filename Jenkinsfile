@@ -22,7 +22,8 @@ pipeline {
          stage('Deploy') {
              steps {
                 echo ("Start invokeAnsiblePlaybook")
-                ansiblePlaybook credentialsId: 'private_key1', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansible/inventory/hosts', playbook: 'ansible/playbooks/play.yml'
+                ansiblePlaybook become: true, colorized: true, credentialsId: 'private_key1', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansible/inventory/hosts', playbook: 'ansible/playbooks/play.yml'
+                //ansiblePlaybook credentialsId: 'private_key1', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansible/inventory/hosts', playbook: 'ansible/playbooks/play.yml'
                 echo ("End invokeAnsiblePlaybook")
                 
                 }
