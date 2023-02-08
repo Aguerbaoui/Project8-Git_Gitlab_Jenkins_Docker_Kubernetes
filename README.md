@@ -33,4 +33,8 @@ pull an image from docker hub using this command
 docker pull tomcat
 en se basant sur le lien suivant:
 https://shootskill.com/tutorials/devops-set-ci-cd-pipeline-git-jenkins-docker/4/
+## Create a Dockerfile
+you can find attached in this project
+## ensure the communication between Jenkins and Docker unsing the plugin Publish Over ssh can test using Maven project
+
 
