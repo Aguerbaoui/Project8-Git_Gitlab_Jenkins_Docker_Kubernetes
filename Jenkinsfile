@@ -22,8 +22,10 @@ pipeline {
         
          stage('Docker Test') {
                  steps {
+
+                 sshPublisher(publishers: [sshPublisherDesc(configName: 'ubuntu', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker images; docker ps', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'webapp/target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
               
-                    sh 'docker images .' 
+                    //sh 'docker images .' 
                    // sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:latest'
                 
                  }
