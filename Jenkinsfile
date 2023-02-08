@@ -13,21 +13,55 @@ pipeline {
         }
 
         stage('Build') {
-             steps {
-                 withMaven(maven: 'Maven') {
-                 sh script: 'mvn clean install package'}
+                steps {
+                     withMaven(maven: 'Maven') {
+                    sh script: 'mvn clean install package'}
         
                 }
         }
-         stage('Deploy') {
-             steps {
-                echo ("Start invokeAnsiblePlaybook")
-                ansiblePlaybook become: true, colorized: true, credentialsId: 'private_key1', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansible/inventory/hosts', playbook: 'ansible/playbooks/play.yml'
-                //ansiblePlaybook credentialsId: 'private_key1', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansible/inventory/hosts', playbook: 'ansible/playbooks/play.yml'
-                echo ("End invokeAnsiblePlaybook")
+        
+         stage('Docker Test') {
+                 steps {
+              
+                    sh 'docker images .' 
+                   // sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:latest'
                 
+                 }
+        }
+        stage('Docker Build and Tag') {
+                 steps {
+              
+                    sh 'docker build -t samplewebapp:latest .' 
+                    sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:latest'
+                
+                 }
+        }
+         stage('Publish image to Docker Hub') {
+          
+             steps {
+                 withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+                 sh  'docker push nikhilnidhi/samplewebapp:latest'
+       
+                     }
+                  
                 }
         }
+          stage('Run Docker container on Jenkins Agent') {
+             
+            steps 
+                {
+                sh "docker run -d -p 8003:8080 nikhilnidhi/samplewebapp"
+ 
+                 }
+              }
+      stage('Run Docker container on remote hosts') {
+             
+            steps {
+                sh "docker -H ssh://jenkins@172.31.28.25 run -d -p 8003:8080 nikhilnidhi/samplewebapp"
+ 
+            }
+        }
+
     
 
     } 
