@@ -1,15 +1,15 @@
 pipeline {
         agent any
-        environement{
+      /*  environement{
 
             DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-        }
+        }*/
 
     stages {
     
         stage('git clone') {
                 steps {
-                     git branch: 'main', credentialsId: 'jenkins', url: 'git@gitlab.com:Aguerbaoui/project-7.git'
+                     git branch: 'main', credentialsId: 'jenkins', url: 'git@gitlab.com:Aguerbaoui/project-8.git'
             
             
                 }
