@@ -1,5 +1,9 @@
 pipeline {
         agent any
+        environement{
+
+            DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+        }
 
     stages {
     
@@ -19,17 +23,33 @@ pipeline {
         
                 }
         }
-       /* stage('Install and configuer Docker'){
+
+
+
+      stage('Docker Build and Tag') {
+           steps {
+              
+                  sh 'docker build -t tomcat-image .' 
+                  sh 'docker tag nginxtest nadiaaguerbaoui1/tomcat-image:latest'
+                  sh 'docker tag nginxtest nadiaaguerbaoui1/tomcat-image:$BUILD_NUMBER'
+               
+          }
+        }
+
+
+
+       /* stage('Copy and build the Dockerfile ')
+        {
+
                 steps{
 
-                    echo ("Start invokeAnsiblePlaybook")
-                    ansiblePlaybook become: true, colorized: true, credentialsId: 'private_key1', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansible/inventory/hosts', playbook: 'ansible/playbooks/playbook.yml'
-                    echo ("End invokeAnsiblePlaybook")
-       
+                  sshPublisher(publishers: [sshPublisherDesc(configName: 'ubuntu', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker images', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'Dockerfile')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+
 
                 }
+        }
 
-        }*/
+      */
         
       /*  stage('Build image and run Docker container on remote host') {
                 steps {
@@ -41,6 +61,31 @@ pipeline {
               
                 }
         }*/
+
+     /*  stage('Docker Build and Tag') {
+           steps {
+              
+                sh 'docker build -t nginxtest:latest .' 
+                  sh 'docker tag nginxtest nikhilnidhi/nginxtest:latest'
+                sh 'docker tag nginxtest nikhilnidhi/nginxtest:$BUILD_NUMBER'
+               
+          }
+        }*/
+        
+     
+         stage('Publish image to Docker Hub') {
+          
+            steps {
+                withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+                    sh  'docker push nadiaaguerbaoui1/tomcat-image:latest'
+                    sh  'docker push nadiaaguerbaoui1/tomcat-image:$BUILD_NUMBER' 
+                   }
+                  
+          }
+        }
+
+
+
   
      
 
