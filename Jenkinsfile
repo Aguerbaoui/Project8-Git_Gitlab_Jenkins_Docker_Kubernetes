@@ -47,7 +47,7 @@ pipeline {
         steps{
 
             script{
-                    kubernetesDeploy (configs: 'dep.yaml', kubeconfigId: 'kubeconfig')
+                    kubernetesDeploy (configs: 'kubectl apply -f dep.yaml', kubeconfigId: 'kubeconfig')
                    // kubernetesDeploy configs: '', kubeConfig: [path: ''], kubeconfigId: 'kubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
                 }
 
