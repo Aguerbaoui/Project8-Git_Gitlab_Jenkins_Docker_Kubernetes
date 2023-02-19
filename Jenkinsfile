@@ -25,17 +25,24 @@ pipeline {
 
       stage('Docker Build and Tag') {
            steps {
-              dockerImage = docker.build("nadiaaguerbaoui1/tomcat-image:latest")
+            sh 'docker build -t nadiaaguerbaoui1/tomcat-image:latest .'
            
-          }
+               }
         }
+     /*  stage('Login') {
+         steps {
+           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        }
+    
+    
+               }*/
      
          stage('Publish image to Docker Hub') {
           
             steps {
                 withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
                    
-                   dockerImage.push()
+                   sh 'docker push nadiaaguerbaoui1/tomcat-image:latest'
                   
                    }
       
