@@ -26,7 +26,7 @@ pipeline {
       stage('Docker Build and Tag') {
            steps {
             sh 'docker build -t nadiaaguerbaoui1/tomcat-image:latest .'
-            sh 'docker tag tomcat-image nadiaaguerbaoui1/tomcat-image:$BUILD_NUMBER'
+           // sh 'docker tag tomcat-image nadiaaguerbaoui1/tomcat-image:$BUILD_NUMBER'
            
                }
         }
@@ -37,7 +37,7 @@ pipeline {
                 withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
                    
                    sh 'docker push nadiaaguerbaoui1/tomcat-image:latest'
-                   sh 'docker push tomcat-image nadiaaguerbaoui1/tomcat-image:$BUILD_NUMBER'
+                  // sh 'docker push tomcat-image nadiaaguerbaoui1/tomcat-image:$BUILD_NUMBER'
                    }
       
                   
