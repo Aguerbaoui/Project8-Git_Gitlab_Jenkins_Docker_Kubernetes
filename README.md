@@ -73,3 +73,5 @@ http://50.18.137.175:30218
 curl http://<public-node-ip>:<node-port>
 you can use this link :
 https://kubernetes.io/docs/tasks/access-application-cluster/service-access-application-cluster/
+curl http://52.53.152.38:32221/
+http://52.53.152.38:32221/webapp/
